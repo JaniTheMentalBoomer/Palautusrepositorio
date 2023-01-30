@@ -1,2 +1,2 @@
 # Palautusrepositorio
-FyllStack-open
+FullStack-open
