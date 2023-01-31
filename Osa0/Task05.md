@@ -27,5 +27,5 @@ sequenceDiagram
     server-->>browser: Haetaan json-data
     deactivate server
 
-    Note right of browser: datan haun jälkeen haettu sivu renderöytyy näkyviin js-koodin mukaisesti
+    Note right of browser: datahaun jälkeen haettu sivu renderöytyy näkyviin
 ```
