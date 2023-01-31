@@ -7,10 +7,10 @@ sequenceDiagram
     
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    server-->>browser: HTML dokumentti
+    server-->>browser: HTML statuskoodi 302
     deactivate server
     
-    Note right of browser: tallennettu note lisätään POST metodilla HTML dokumenttiin
+    Note right of browser: tallennettu note lisätään POST metodilla json-tietokantaan ja aloitetaan HTML uudelleenohjaus
     
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
