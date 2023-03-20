@@ -1,0 +1,20 @@
+Käynnistä JSON-server paikallisesti porttiin 3001 ja avaa projektin db.json:
+npx json-server --port=3001 --watch db.json
+
+Luo uusi react-projekti:
+npx create-react-app <projektin nimi>
+
+Käynnistä react-projekti:
+ole projektin juuressa ja -> npm start
+
+Asentaa axios-kirjaston projektiin:
+npm install axios
+
+Sovelluskehityksen ajaksi asennettava json-server riippuvuus:
+npm install json-server --save-dev
+Lisää package.json scripts-osioon: "server": "json-server -p3001 --watch db.json"
+jonka jälkeen serverin voi avata komennolla npm run server
+
+Ohjeistuksia json-server asioihin:
+https://fullstackopen.com/osa2/palvelimella_olevan_datan_hakeminen#npm
+
