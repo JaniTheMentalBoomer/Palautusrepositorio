@@ -1,10 +1,10 @@
 import Person from './Person'
 
-const Persons = ({ persons }) => {
+const Persons = ({ persons, search, removePerson }) => {
     return (
         <>
             <div>
-                {persons.map(person => (<Person key={person.name} person={person} />))}
+                {persons.filter(keyword => keyword.name.toLowerCase().includes(search)).map(person => (<Person key={person.name} person={person} removePerson={removePerson} />))}
             </div>
         </>)
 }

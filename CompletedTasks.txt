@@ -1,0 +1,23 @@
+Osista 0-5 saa skipata max 3 tehtävää, jotta yht määrä olisi 105 / 108, jolloin
+arvosanaksi määräytyy kurssikokeen jälkeen 4
+
+Osat 0-7 max teht.määrä on 150, joten 12 tehtävää on mahdollista jättää max välistä, 
+mikäli pyrkii saamaan arvosanaksi 5 ja 7op
+
+OSA0: 6
+
+OSA1: 2 + 3 + 8 = 13 (1.14 skipattu)
+
+OSA2: 5 + 5 + 1 + 4 + 5 (2.19-20 tekemättä!!) = 20
+
+OSA3:
+
+OSA4:
+
+OSA5:
+
+OSA6:
+
+OSA7:
+
+Tehtäviä yht: 6 + 13 + 10 = 29

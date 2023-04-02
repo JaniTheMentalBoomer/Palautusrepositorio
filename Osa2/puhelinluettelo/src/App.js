@@ -1,32 +1,26 @@
-//Versio 2.10 (2.9 skipped)
+//Versio 2.17
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
-
-const Filter = ({}) => {
-    return (
-        <form>
-            <div>filter shown with <input /></div>
-        </form>)
-}
+import Filter from './components/Filter'
+import peopleService from './services/people'
+import Notification from './components/Notification'
 
 const App = () => {
     const [persons, setPersons] = useState([])
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
-    //const [search, setSearch] = useState('') 
+    const [search, setSearch] = useState('') 
+    const [notification, setNotification] = useState(null)
 
-    //useEffect-hookin avulla haetaan JSON-serverilt� persons data
+    //useEffect-hookin avulla haetaan JSON-serverilt� persons data
     useEffect(() => {
-        console.log('effect')
-        axios
-            .get('http://localhost:3001/persons')
-            .then(response => {
-                console.log('promise fulfilled')
-                setPersons(response.data)
-            })
-    }, [])
+        peopleService
+          .getAll()
+            .then(initialPersons => {
+            setPersons(initialPersons)
+          })
+      }, [])
     console.log('render', persons.length, 'persons')
 
     const addPerson = (event) => {
@@ -36,15 +30,72 @@ const App = () => {
             number: newNumber
         }
 
+        const person = persons.filter(p => p.name === newName)
+        const targetedPerson = person[0]
+        const changedPerson = { ...targetedPerson, number: newNumber }
+
         if (persons.find(person => person.name === newName)) {
-            alert(`${newName} is already added to phonebook`)
+            if (window.confirm("Korvataanko olemasassa oleva numero uudella?")) {
+                peopleService
+                .update(changedPerson.id, changedPerson)
+                    .then(returnedPerson => {
+                    setPersons(persons.map(p => p.id !== targetedPerson.id ? p : returnedPerson))
+                })
+                .catch(error => {
+                    setNotification(
+                      `VIRHE! Yhteystieto '${targetedPerson.name}' on jo poistettu serveriltä`
+                    )
+                    setTimeout(() => {
+                      setNotification(null)
+                    }, 6000)
+                  })
+                setNotification('Yhteystieto päivitetty onnistuneesti!')
+                setTimeout(() => {
+                  setNotification(null)
+                }, 6000)
+            }
         }
         else {
-            setPersons(persons.concat(personObject))
+            peopleService
+            .create(personObject)
+            .then(returnedNote => {
+            setPersons(persons.concat(returnedNote))
             setNewName('')
             setNewNumber('')
+            setNotification('Yhteystieto lisätty onnistuneesti!')
+            setTimeout(() => {
+                setNotification(null)
+            }, 6000)
+            })
         }
     }
+
+    const removePerson = id => {
+        const targetedPerson = persons.filter(person => person.id === id)
+        const targetName = targetedPerson[0].name
+        const personId = targetedPerson[0].id
+
+        console.log(personId)
+        if (window.confirm(`Poistetaanko yhteystieto: ${targetName}`)) {
+            peopleService
+                .removePerson(personId).then(returnedNote => {
+                    setPersons(persons.filter(p => p.id !== personId))
+                })
+                .catch(error => {
+                    setNotification(
+                        `Yhteystiedon poistamisessa tapahtui VIRHE!`
+                    )
+                setTimeout(() => {
+                    setNotification(null)
+                }, 6000)
+                })
+            setNotification('Yhteystieto poistettu onnistuneesti!')
+            setTimeout(() => {
+                setNotification(null)
+            }, 6000)
+        }
+            
+      }
 
     const handleNameChange = (event) => {
         console.log(event.target.value)
@@ -56,15 +107,20 @@ const App = () => {
         setNewNumber(event.target.value)
     }
 
+    const handleFilterChange = (event) => {
+        setSearch(event.target.value)
+    }
+
     return (
         <div>
             <h1>Phonebook</h1>
-            <Filter />
+            <Notification message={notification}/>
+            <Filter search={search} handleChange={handleFilterChange} />
             <PersonForm addP={addPerson} newName={newName} hNameC={handleNameChange}
             newNum={newNumber} hNumC={handleNumberChange}/>
             <h2>Numbers</h2>
             <ul>
-                <Persons persons={persons} /> 
+                <Persons persons={persons} search={search} removePerson={removePerson}/> 
             </ul>
         </div>
     )
