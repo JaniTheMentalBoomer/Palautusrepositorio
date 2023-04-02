@@ -20,4 +20,4 @@ OSA6:
 
 OSA7:
 
-Tehtäviä yht: 6 + 13 + 10 = 29
+Tehtäviä yht: 6 + 13 + 20 = 39
