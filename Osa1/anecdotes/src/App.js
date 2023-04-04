@@ -1,4 +1,4 @@
-//Versio 1.13
+//Versio 1.14
 import { useState } from 'react'
 
 const Title = ({ text }) => (<h1>{text}</h1>)
@@ -39,10 +39,12 @@ const App = () => {
     }
 
     const increaseVote = () => {
-        // kasvatetaan taulukon paikan 2 arvoa yhdell�
         copy[selected] += 1  
         setPoints(copy)
     }
+
+    //Haetaan taulukon indeksi, jolla on eniten ääniä
+    const winnerNumber = copy.indexOf(Math.max(...points))
 
     console.log('value of selected is:', selected)
     return (
@@ -51,6 +53,8 @@ const App = () => {
             <h3>has {copy[selected]} votes</h3>
             <Button handleClick={selectNum} text="Next anecdote" />
             <Button handleClick={increaseVote} text="Vote" />
+            <Title text={'Anecdote with most votes: '} />
+            <h3>{anecdotes[winnerNumber]}</h3>
         </div>
     )
 }

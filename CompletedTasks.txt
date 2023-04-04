@@ -6,9 +6,9 @@ mikäli pyrkii saamaan arvosanaksi 5 ja 7op
 
 OSA0: 6
 
-OSA1: 2 + 3 + 8 = 13 (1.14 skipattu)
+OSA1: 2 + 3 + 9 = 14
 
-OSA2: 5 + 5 + 1 + 4 + 5 (2.19-20 tekemättä!!) = 20
+OSA2: 5 + 5 + 1 + 4 + 3 (2.19-20 tekemättä!!) = 18
 
 OSA3:
 
@@ -20,4 +20,4 @@ OSA6:
 
 OSA7:
 
-Tehtäviä yht: 6 + 13 + 20 = 39
+Tehtäviä yht: 6 + 14 + 18 = 38
