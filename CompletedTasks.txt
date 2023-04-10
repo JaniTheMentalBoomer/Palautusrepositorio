@@ -10,7 +10,7 @@ OSA1: 2 + 3 + 9 = 14
 
 OSA2: 5 + 5 + 1 + 4 + 3 (2.19-20 tekemättä!!) = 18
 
-OSA3:
+OSA3: 21 total
 
 OSA4:
 
@@ -20,4 +20,4 @@ OSA6:
 
 OSA7:
 
-Tehtäviä yht: 6 + 14 + 18 = 38
+Tehtäviä yht: 6 + 14 + 18 + 21 = 59
