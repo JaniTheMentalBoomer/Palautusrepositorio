@@ -1,9 +1,12 @@
 POST http://localhost:3003/api/blogs HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RpMSIsImlkIjoiNjQ0NTEyYzFjZjkyNWQ5MWJiZDJhMWVlIiwiaWF0IjoxNjgyMjU3MDk2LCJleHAiOjE2ODIyNjA2OTZ9.9oaGFwNfwIXKYLUDN_qizLMu0k-wLmo5TZURBXuhais
 
 {
-    "title": "Fifth blog",
-    "author": "Uuno",
-    "url": "http://www.EssonBaari.fi",
-    "likes": 50
+    "title": "ninth blog",
+    "author": "testi1",
+    "url": "http://www.testi.fi",
+    "likes": 10
 }
+
+//ota oikea Bearer <koodi> try_login-requestista!
