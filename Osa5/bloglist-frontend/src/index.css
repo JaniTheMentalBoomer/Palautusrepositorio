@@ -1,0 +1,52 @@
+  h1, h2 {
+    color: green;
+    font-style: italic;
+  }
+
+    
+  input {
+    margin: 0 1rem 1rem;
+  }
+
+  .bloglist {
+    border-radius: 4px;
+    border-style: solid;
+    max-width: 20rem;
+    padding: 1rem;
+    margin: 1rem;
+    margin-left: 0;
+  }
+
+  .blog-item {
+    font-size: 15px;
+    padding: 2px;
+  }
+
+  .removebutton {
+    margin: 0.5rem;
+    margin-left: 0;
+  }
+
+  .blogTitle {
+    display: inline-block;
+    min-width: 16rem;
+  }
+
+  #viewMore {
+    display: inline-block;
+    margin-left: 1rem;
+  }
+
+  #likes1 {
+    margin-left: 1rem;
+  }
+
+  .notification {
+    background: lightgrey;
+    font-size: 20px;
+    font-weight: bold;
+    border-style: 'solid';
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
