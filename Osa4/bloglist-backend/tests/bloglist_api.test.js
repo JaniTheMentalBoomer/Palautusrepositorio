@@ -29,11 +29,9 @@ describe('when there is initially some blogs saved', () => {
   test('a specific blog is within the returned blogs', async () => {
     const response = await api.get('/api/blogs')
 
-    const titles = response.body.map(b => b.title)
+    const titles = response.body.map((b) => b.title)
 
-    expect(titles).toContain(
-      'Spiritual-energy'
-    )
+    expect(titles).toContain('Spiritual-energy')
   })
 })
 
@@ -43,14 +41,11 @@ describe('addition of a new blog', () => {
       title: 'test',
       author: 'Humbuka',
       likes: 2,
-      id: '643431648a29717fa826b47dxx5'
+      id: '643431648a29717fa826b47dxx5',
     }
 
-    if(!newBlog.url || !newBlog.title){
-      await api
-        .post('/api/blogs')
-        .send(newBlog)
-        .expect(400)
+    if (!newBlog.url || !newBlog.title) {
+      await api.post('/api/blogs').send(newBlog).expect(400)
     }
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -59,14 +54,13 @@ describe('addition of a new blog', () => {
   })
 
   test('a valid blog can be added ', async () => {
-
     const newBlog = {
       title: 'Mendosa gang',
       author: 'Martines',
       url: 'www.gansta.com',
       likes: 12,
       userId: '643431648a29717fa826b47dx',
-      id: '643431648a29717fa826b47dxx4'
+      id: '643431648a29717fa826b47dxx4',
     }
 
     await api
@@ -77,10 +71,8 @@ describe('addition of a new blog', () => {
 
     const blogsAtEnd = await helper.blogsInDb()
 
-    const titles = blogsAtEnd.map(b => b.title)
-    expect(titles).toContain(
-      'Mendosa gang'
-    )
+    const titles = blogsAtEnd.map((b) => b.title)
+    expect(titles).toContain('Mendosa gang')
   })
 
   test('blog without given likes will be given the default value of 0', async () => {
@@ -88,7 +80,7 @@ describe('addition of a new blog', () => {
       title: 'Zero likes test',
       author: 'Miranda',
       url: 'www.noLikes.sv',
-      id: '643431648a29717fa826b47dxx666'
+      id: '643431648a29717fa826b47dxx666',
     }
 
     if (!newBlog.likes) {
@@ -103,7 +95,9 @@ describe('addition of a new blog', () => {
 
     const blogsAtEnd = await helper.blogsInDb()
 
-    const newestBlog = blogsAtEnd.find(blog => blog.title === 'Zero likes test')
+    const newestBlog = blogsAtEnd.find(
+      (blog) => blog.title === 'Zero likes test'
+    )
     expect(newestBlog.likes).toBe(0)
   })
 })
@@ -133,17 +127,13 @@ describe('removing a specific blog', () => {
     const blogsAtStart = await helper.blogsInDb()
     const blogToDelete = blogsAtStart[0]
 
-    await api
-      .delete(`/api/blogs/${blogToDelete.id}`)
-      .expect(204)
+    await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204)
 
     const blogsAtEnd = await helper.blogsInDb()
 
-    expect(blogsAtEnd).toHaveLength(
-      helper.mockData.length - 1
-    )
+    expect(blogsAtEnd).toHaveLength(helper.mockData.length - 1)
 
-    const titles = blogsAtEnd.map(b => b.title)
+    const titles = blogsAtEnd.map((b) => b.title)
 
     expect(titles).not.toContain(blogToDelete.title)
   })
@@ -156,7 +146,7 @@ describe('updating a specific blog', () => {
 
     const modifiedBlog = {
       blogToUpdate,
-      title: blogToUpdate.title = 'kokkola'
+      title: (blogToUpdate.title = 'kokkola'),
     }
 
     await api
@@ -172,7 +162,7 @@ describe('when there is initially one user at db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
-    const passwordHash = await bcrypt.hash('sekret', 10)
+    const passwordHash = await bcrypt.hash('salainen', 10)
     const user = new User({ username: 'root', passwordHash })
 
     await user.save()
@@ -196,7 +186,7 @@ describe('when there is initially one user at db', () => {
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
 
-    const usernames = usersAtEnd.map(u => u.username)
+    const usernames = usersAtEnd.map((u) => u.username)
     expect(usernames).toContain(newUser.username)
   })
 
@@ -230,7 +220,8 @@ describe('when there is initially one user at db', () => {
       password: 'salainen',
     }
 
-    const nameTooShort = 'User validation failed: username: Path `username` (`te`) is shorter than the minimum allowed length (3).'
+    const nameTooShort =
+      'User validation failed: username: Path `username` (`te`) is shorter than the minimum allowed length (3).'
     const result = await api
       .post('/api/users')
       .send(newUser)
@@ -252,7 +243,8 @@ describe('when there is initially one user at db', () => {
       password: 'sa',
     }
 
-    const passTooShort = 'Password length too short! Password length needs to be atleast 3 characters long'
+    const passTooShort =
+      'Password length too short! Password length needs to be atleast 3 characters long'
     const result = await api
       .post('/api/users')
       .send(newUser)
@@ -265,9 +257,6 @@ describe('when there is initially one user at db', () => {
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 })
-
-
-
 
 afterAll(async () => {
   await mongoose.connection.close()
